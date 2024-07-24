@@ -33,6 +33,8 @@ impl Core {
 
     pub fn load_rom(&mut self, mut file: File){
         self.memory = [0; MEMORY_SIZE];
+        self.memory[..80].copy_from_slice(&INITIAL_MEMORY);
+
         let mut buffer = Vec::new();
         match file.read_to_end(&mut buffer){
             Ok(_) => (),

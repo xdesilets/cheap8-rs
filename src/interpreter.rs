@@ -1,8 +1,11 @@
+use std::process::id;
 use std::usize;
+use rand::Rng;
 use self::{core::Core, environment::*};
 
 mod environment;
 pub mod core;
+pub(crate) mod display_view;
 
 pub struct Interpreter {
     pub core: Core,
@@ -86,12 +89,24 @@ impl Interpreter {
                             core.general_purpose_register[0xF] = 1;
                             core.display[idx] = false;
                         }
+                        else {
+                            core.display[idx] = sprite_pixel;
+                        }
+
+                        /*let mut rng = rand::thread_rng();
+                        let random_bool: bool = rng.gen_bool(0.5);
+                        if(idx == 0){
+                            core.display[idx] = false;
+                        }
+                        else {
+                            core.display[idx] = !core.display[idx - 1];
+                        }*/
                     }
                 }
 
             }
 
-            _ => panic!("Unknown instruction: 0x{:X}", instruction) 
+            _ => panic!("Unknown instruction: 0x{:X}", instruction)
         } 
     }
 

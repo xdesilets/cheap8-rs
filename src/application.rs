@@ -1,9 +1,11 @@
 use crate::interpreter::core::Core;
 use crate::interpreter::Interpreter;
+use crate::interpreter::display_view::DisplayView;
 use std::fs::File;
 use iced::time::Instant;
-use iced::{executor, window, Subscription};
+use iced::{executor, window, Subscription, Length};
 use iced::{Command, Element, Theme};
+use iced::widget::Canvas;
 
 pub struct Application {
     interpreter: Interpreter,
@@ -22,7 +24,7 @@ impl iced::Application for Application{
     type Theme = Theme;
 
     fn new(_flags: ()) -> (Application, Command<Self::Message>) {
-        let file = File::open("roms/IBM Logo.ch8").unwrap();
+        let file = File::open("roms/test_opcode.ch8").unwrap();
         let mut core_instance = Core::default();
 
         core_instance.load_rom(file);
@@ -51,9 +53,13 @@ impl iced::Application for Application{
     }
 
     fn view(&self) -> Element<Self::Message> {
-        let instruction = format!("Executing instruction: 0x{:X}", self.current_instruction);
-        let text = iced::widget::text(instruction);
-        return text.into();
+        //let instruction = format!("Executing instruction: 0x{:X}", self.current_instruction);
+        //let text = iced::widget::text(instruction);
+        let display_view = DisplayView::new(&self.interpreter.core.display);
+        Canvas::new(display_view)
+            .width(Length::Fill)
+            .height(Length::Fill)
+            .into()
     }
 
     fn subscription(&self) -> Subscription<Message> {
