@@ -51,7 +51,7 @@ impl Interpreter {
             }
 
             0x1000 => { // Handle 0x1000 instruction - 1NNN - JUMP NNN
-                core.program_counter = nnn as i32;
+                core.program_counter = nnn + PROGRAM_START_POSITION;
             }
 
             0x6000 => {  // Handle 0x6000 instruction - 6XNN - set register VX

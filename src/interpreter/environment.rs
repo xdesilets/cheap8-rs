@@ -4,7 +4,7 @@ pub const MEMORY_SIZE: usize = 4096;
 pub const STACK_SIZE: usize = 16;
 pub const GPR_SIZE: usize = 16;
 pub const CLOCK_SPEED: f32 = 1000.0 / 700.0;
-pub const PROGRAM_START_POSITION: i32 = 0x200;
+pub const PROGRAM_START_POSITION: u16 = 0x200;
 
 pub static INITIAL_MEMORY: [u8; 80] = [
     0xF0, 0x90, 0x90, 0x90, 0xF0, // 0

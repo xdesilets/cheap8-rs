@@ -4,7 +4,7 @@ use super::environment::*;
 
 pub struct Core {
     pub memory: [u8; MEMORY_SIZE],
-    pub program_counter: i32,
+    pub program_counter: u16,
     pub general_purpose_register: [u8; GPR_SIZE],
     pub display: [bool; DISPLAY_WIDTH * DISPLAY_HEIGHT],
     pub index_register: u16,

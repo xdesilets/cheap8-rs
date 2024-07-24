@@ -24,7 +24,7 @@ impl iced::Application for Application{
     type Theme = Theme;
 
     fn new(_flags: ()) -> (Application, Command<Self::Message>) {
-        let file = File::open("roms/test_opcode.ch8").unwrap();
+        let file = File::open("roms/IBM Logo.ch8").unwrap();
         let mut core_instance = Core::default();
 
         core_instance.load_rom(file);
